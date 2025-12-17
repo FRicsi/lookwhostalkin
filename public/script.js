@@ -2,7 +2,7 @@
 // MANUÁLIS VEZÉRLÉS
 // =======================
 
-const MODE = "boy"; // "before" | "girl" | "boy"
+const MODE = "before"; // "before" | "girl" | "boy"
 
 // =======================
 // DOM BETÖLTÉS UTÁN
@@ -60,8 +60,96 @@ document.addEventListener("DOMContentLoaded", () => {
     // jobb oldali kép tükrözve
     boyImg.classList.add("mirror");
   }
-  
 });
+// =======================
+// LÁNY KONFETTI
+// =======================
+
+if (MODE === "girl") {
+  const defaults = {
+    spread: 360,
+    ticks: 50,
+    gravity: 0,
+    decay: 0.94,
+    startVelocity: 30,
+    shapes: ["emoji"],
+    emojis: ["💖", "💝", "❤️‍🔥", "💓", "💞", "💕", "💗", "❤️🩷"],
+    colors: ["#FFC0CB", "#FF69B4", "#FF1493", "#C71585"],
+  };
+
+  function shoot() {
+    confetti({
+      ...defaults,
+      particleCount: 40,
+      scalar: 1.2,
+      shapes: ["star"],
+    });
+
+    confetti({
+      ...defaults,
+      particleCount: 40,
+      scalar: 4.2,
+      shapes: ["star"],
+    });
+
+
+    confetti({
+      ...defaults,
+      particleCount: 10,
+      scalar: 0.75,
+      shapes: ["star"],
+    });
+  }
+
+  // kis késleltetés, hogy biztosan látható legyen
+  setTimeout(shoot, 0);
+  setTimeout(shoot, 500);
+  setTimeout(shoot, 300);
+}
+// =======================
+// FIÚ KONFETTI
+// =======================
+
+if (MODE === "boy") {
+  const defaults = {
+    spread: 360,
+    ticks: 50,
+    gravity: 0,
+    decay: 0.94,
+    startVelocity: 30,
+    shapes: ["star"],
+    colors: ["#FFE400", "#FFBD00", "#E89400", "#FFCA6C", "#FDFFB8"],
+  };
+
+  function shoot() {
+    confetti({
+      ...defaults,
+      particleCount: 40,
+      scalar: 1.2,
+      shapes: ["star"],
+    });
+
+    confetti({
+      ...defaults,
+      particleCount: 40,
+      scalar: 4.2,
+      shapes: ["star"],
+    });
+
+
+    confetti({
+      ...defaults,
+      particleCount: 10,
+      scalar: 0.75,
+      shapes: ["star"],
+    });
+  }
+
+  // kis késleltetés, hogy biztosan látható legyen
+  setTimeout(shoot, 0);
+  setTimeout(shoot, 500);
+  setTimeout(shoot, 300);
+}
 
 // =======================
 // FADE-ES VÁLTÁS
