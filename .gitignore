@@ -69,3 +69,5 @@ node_modules/
 .dataconnect
 
 .vscode
+style_old.css
+csript_old.js

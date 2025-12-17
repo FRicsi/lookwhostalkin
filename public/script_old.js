@@ -9,58 +9,123 @@ const MODE = "boy"; // "before" | "girl" | "boy"
 // =======================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ===== DOM ELEMEK =====
   const body = document.body;
+
+  // alap elemek
   const girlImg = document.getElementById("girlImg");
   const boyImg = document.getElementById("boyImg");
   const headline = document.getElementById("headline");
 
-  // ===== BODY CLASS RESET =====
-  body.className = "";
-  body.classList.add(MODE, "fade-in");
+  // biztos, ami biztos
+  if (!girlImg || !boyImg || !headline) {
+    console.error("Hiányzó DOM elem (girlImg / boyImg / headline)");
+    return;
+  }
 
-  // ===== MIRROR RESET =====
+  // classok törlése
+  /*body.classList.remove("before", "girl", "boy");
+  body.classList.add(MODE);*/
+
+  function switchMode(mode) {
+    body.classList.remove("before", "girl", "boy");
+    body.classList.remove("fade-in", "fade-out");
+
+    body.classList.add(mode);
+    body.classList.add("fade-in");
+
+    applyModeContent(mode);
+  }
+
+  // tükrözés reset
   girlImg.classList.remove("mirror");
   boyImg.classList.remove("mirror");
 
-  // =======================
-  // MODE LOGIKA
-  // =======================
+  // ===== MODE LOGIKA =====
 
   if (MODE === "before") {
     girlImg.src = girlImg.dataset.normal;
     boyImg.src = boyImg.dataset.normal;
+
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
+
+    boyImg.classList.add("mirror");
 
     headline.innerHTML = `
       Hamarosan kiderül,<br>
       <span class="girl-word">kislány</span> leszek-e vagy
       <span class="boy-word">kisfiú</span>!
     `;
-
-    // főoldalon: bal baba tükrözve, jobb nem
-    girlImg.classList.add("mirror");
   }
 
   if (MODE === "girl") {
     girlImg.src = girlImg.dataset.happy;
     boyImg.src = girlImg.dataset.happy;
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
+
+    boyImg.classList.add("mirror");
 
     headline.textContent = "Kislány leszek!";
-
-    // jobb oldali kép tükrözve
-    boyImg.classList.add("mirror");
   }
 
   if (MODE === "boy") {
     girlImg.src = boyImg.dataset.happy;
     boyImg.src = boyImg.dataset.happy;
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
 
-    headline.textContent = "Kisfiú leszek!";
-
-    // jobb oldali kép tükrözve
     boyImg.classList.add("mirror");
+    headline.textContent = "Kisfiú leszek!";
   }
-  
+
+  // =======================
+  // KONFETTI EFFEKT
+  // =======================
+
+  let confettiInterval = null;
+
+  function launchConfettiPiece(side) {
+    const layer = document.getElementById("confettiLayer");
+    if (!layer) return;
+
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+
+    // színek mód szerint
+    const colorsGirl = ["#ff7eb9", "#ffc1dc", "#ff9acb"];
+    const colorsBoy = ["#4da3ff", "#9fd3ff", "#6bbcff"];
+
+    const colors = document.body.classList.contains("girl")
+      ? colorsGirl
+      : colorsBoy;
+
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    // indulási pozíció – alsó sarkok
+    confetti.style.left = side === "left" ? "20px" : "calc(100% - 20px)";
+    confetti.style.bottom = "0px";
+
+    // röppálya
+    const x =
+      side === "left"
+        ? Math.random() * 250 + 100
+        : -(Math.random() * 250 + 100);
+
+    const y = -(Math.random() * 400 + 300);
+
+    confetti.style.setProperty("--x", `${x}px`);
+    confetti.style.setProperty("--y", `${y}px`);
+
+    layer.appendChild(confetti);
+
+    // eltakarítás
+    setTimeout(() => confetti.remove(), 6000);
+  }
+
+
+
 });
 
 // =======================
@@ -87,6 +152,10 @@ function switchMode(mode) {
 const body = document.body;
 
 body.classList.add(MODE, "fade-in");
+
+startConfetti(MODE);
+/*applyContent(MODE); /*hibára fut: not defined
+switchMode(MODE);*/
 
 // =======================
 // TOY BANNER – FOLYAMATOS SPRITE GENERÁTOR
