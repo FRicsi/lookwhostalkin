@@ -1,0 +1,264 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+
+/* =========================
+   GLOBAL RESET
+   ========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: 'Baloo 2', cursive;
+  overflow: hidden;
+  transition: opacity 1.8s ease;
+}
+
+body.fade-in { opacity: 1; }
+body.fade-out { opacity: 0; }
+
+/* =========================
+   FŐOLDAL (BEFORE)
+   ========================= */
+
+body.before {
+  background: linear-gradient(135deg, #fff4b8, #d8f3c8);
+  position: relative;
+}
+
+/* ---- HERO rendszer ---- */
+
+.hero {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---- Banner konténerek ---- */
+
+.banner-container {
+  position: absolute;
+  left: -5vw;
+  width: 110vw;
+  height: 8vh;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 20;
+}
+
+.banner-container.top {
+  top: 0;
+}
+
+.banner-container.bottom {
+  top: calc(70vh - 8vh);
+}
+
+/* ---- Toy sprite ---- */
+
+.toy-banner .toy {
+  position: absolute;
+  bottom: 0;
+  height: 90%;
+  width: auto;
+  will-change: transform;
+}
+
+/* vízszintes mozgás */
+@keyframes toy-move {
+  from { transform: translateX(0); }
+  to   { transform: translateX(var(--distance)); }
+}
+
+/* (lebegés jelenleg kikapcsolva, de megmarad) */
+@keyframes toy-float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(0); }
+}
+
+/* ---- Középső tartalom ---- */
+
+.content-container {
+  position: absolute;
+  top: 8vh;
+  left: 0;
+  width: 100vw;
+  height: calc(70vh - 16vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page {
+  width: 100%;
+  max-width: 1400px;
+  min-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5vw;
+}
+
+/* ---- Babák (FŐOLDAL) ---- */
+
+body.before .baby {
+  flex: 0 0 28%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.before .baby img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* ---- Középső szöveg ---- */
+
+.center-text {
+  flex: 0 0 40%;
+  text-align: center;
+  font-size: clamp(32px, 4vw, 72px);
+  color: #3b6f5c;
+  line-height: 1.3;
+}
+
+/* színezett szavak */
+.girl-word { color: #c2185b; }
+.boy-word  { color: #1565c0; }
+
+/* =========================
+   LÁNY OLDAL
+   ========================= */
+
+body.girl {
+  background: linear-gradient(135deg, #ffd6e8, #ffeaf2);
+}
+
+body.girl .page {
+  height: 100vh;
+}
+
+body.girl .baby {
+  width: 22vw;
+  max-width: 320px;
+  animation: bounce-girl 2.8s ease-in-out infinite;
+}
+
+body.girl .baby.right { animation-delay: .5s; }
+
+@keyframes bounce-girl {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+body.girl .center-text {
+  font-size: clamp(42px, 6vw, 72px);
+  color: #c2185b;
+}
+
+/* =========================
+   FIÚ OLDAL
+   ========================= */
+
+body.boy {
+  background: linear-gradient(135deg, #d6ebff, #eef6ff);
+}
+
+body.boy .baby {
+  width: 22vw;
+  max-width: 320px;
+  animation: bounce-boy 2.8s ease-in-out infinite;
+}
+
+body.boy .baby.right { animation-delay: .5s; }
+
+@keyframes bounce-boy {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+body.boy .center-text {
+  font-size: clamp(42px, 6vw, 72px);
+  color: #1565c0;
+}
+
+/* bannerek csak főoldalon */
+body.girl .banner-container,
+body.boy .banner-container {
+  display: none;
+}
+
+/* =========================
+   404 OLDAL
+   ========================= */
+
+body.page-404 {
+  background: linear-gradient(135deg, #fff4b8, #d8f3c8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-root {
+  width: 100%;
+  min-width: 320px;
+}
+
+.error-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4vw;
+  padding: 4vh 4vw;
+}
+
+.error-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-col img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+.text-col {
+  flex-direction: column;
+}
+
+.error-404 {
+  font-size: clamp(120px, 20vw, 260px);
+  line-height: 1;
+  color: #3b6f5c;
+}
+
+.error-sub {
+  font-size: clamp(14px, 1.6vw, 22px);
+  color: #3b6f5c;
+  white-space: nowrap;
+}
+
+/* =========================
+   MOBIL – CSAK MÉRETEZÉS
+   ========================= */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 0 4vw;
+  }
+
+  .center-text {
+    font-size: clamp(32px, 5vw, 48px);
+  }
+}
