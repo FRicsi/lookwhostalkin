@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap");
 
 /* =========================
    GLOBAL RESET
@@ -8,20 +8,25 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   width: 100%;
   height: 100%;
 }
 
 body {
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
   overflow: hidden;
   transition: opacity 1.8s ease;
 }
 
-body.fade-in { opacity: 1; }
-body.fade-out { opacity: 0; }
+body.fade-in {
+  opacity: 1;
+}
+body.fade-out {
+  opacity: 0;
+}
 
 /* =========================
    FŐOLDAL (BEFORE)
@@ -85,14 +90,23 @@ body.before {
 
 /* vízszintes mozgás */
 @keyframes toy-move {
-  from { transform: translateX(0); }
-  to   { transform: translateX(var(--distance)); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--distance));
+  }
 }
 
 /* (lebegés jelenleg kikapcsolva, de megmarad) */
 @keyframes toy-float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(0); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0);
+  }
 }
 
 /* ---- Középső tartalom ---- */
@@ -144,8 +158,12 @@ body.before .baby img {
 }
 
 /* színezett szavak */
-.girl-word { color: #c2185b; }
-.boy-word  { color: #1565c0; }
+.girl-word {
+  color: #c2185b;
+}
+.boy-word {
+  color: #1565c0;
+}
 
 /* =========================
    LÁNY OLDAL
@@ -165,11 +183,18 @@ body.girl .baby {
   animation: bounce-girl 2.8s ease-in-out infinite;
 }
 
-body.girl .baby.right { animation-delay: .5s; }
+body.girl .baby.right {
+  animation-delay: 0.5s;
+}
 
 @keyframes bounce-girl {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
 }
 
 body.girl .center-text {
@@ -191,11 +216,18 @@ body.boy .baby {
   animation: bounce-boy 2.8s ease-in-out infinite;
 }
 
-body.boy .baby.right { animation-delay: .5s; }
+body.boy .baby.right {
+  animation-delay: 0.5s;
+}
 
 @keyframes bounce-boy {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
 }
 
 body.boy .center-text {
@@ -275,8 +307,10 @@ body.page-404 {
   }
 }
 
+/* =========================
+   KONFETTI RÉTEG
+   ========================= */
 
-/* KONFETTI RÉTEG */
 .confetti-layer {
   position: fixed;
   inset: 0;
