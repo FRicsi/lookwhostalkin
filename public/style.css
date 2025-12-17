@@ -27,8 +27,20 @@ body.fade-out { opacity: 0; }
    FŐOLDAL (BEFORE)
    ========================= */
 
+/* ===== FŐOLDAL RENDSZER KONTÉNER ===== */
+body.before .hero {
+  min-width: 320px;
+  min-height: 200px;
+
+  width: 100%;
+  max-width: 100vw;
+
+  margin: 0 auto;
+  overflow: hidden;
+}
+
 body.before {
-  background: linear-gradient(135deg, #fff4b8, #d8f3c8);
+  background: linear-gradient(135deg, #fff4b8, #82b95d);
   position: relative;
 }
 
