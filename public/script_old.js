@@ -9,174 +9,124 @@ const MODE = "boy"; // "before" | "girl" | "boy"
 // =======================
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ===== DOM ELEMEK =====
   const body = document.body;
+
+  // alap elemek
   const girlImg = document.getElementById("girlImg");
   const boyImg = document.getElementById("boyImg");
   const headline = document.getElementById("headline");
 
-  // ===== BODY CLASS RESET =====
-  body.className = "";
-  body.classList.add(MODE, "fade-in");
-
-  // =======================
-  // MODE LOGIKA
-  // =======================
-  function confettishower() {
-    const duration = 15 * 10000,
-      animationEnd = Date.now() + duration;
-
-    let skew = 1;
-
-    function randomInRange(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-
-    (function frame() {
-      const timeLeft = animationEnd - Date.now(),
-        ticks = Math.max(200, 500 * (timeLeft / duration));
-
-      skew = Math.max(0.8, skew - 0.001);
-
-      confetti({
-        particleCount: 0.5,
-        startVelocity: 0,
-        ticks: ticks,
-        origin: {
-          x: Math.random(),
-          // since particles fall down, skew start toward the top
-          y: Math.random() * skew - 0.2,
-        },
-        colors: ["#EE772D", "#AAB05E", "#7EAA8C", "#FCB925", "#fe9addff"],
-        shapes: ["star"],
-        gravity: randomInRange(0.4, 0.6),
-        scalar: randomInRange(0.5, 4),
-        drift: randomInRange(-1, 1),
-      });
-
-      if (timeLeft > 0) {
-        requestAnimationFrame(frame);
-      }
-    })();
+  // biztos, ami biztos
+  if (!girlImg || !boyImg || !headline) {
+    console.error("Hiányzó DOM elem (girlImg / boyImg / headline)");
+    return;
   }
 
+  // classok törlése
+  /*body.classList.remove("before", "girl", "boy");
+  body.classList.add(MODE);*/
+
+  function switchMode(mode) {
+    body.classList.remove("before", "girl", "boy");
+    body.classList.remove("fade-in", "fade-out");
+
+    body.classList.add(mode);
+    body.classList.add("fade-in");
+
+    applyModeContent(mode);
+  }
+
+  // tükrözés reset
+  girlImg.classList.remove("mirror");
+  boyImg.classList.remove("mirror");
+
+  // ===== MODE LOGIKA =====
 
   if (MODE === "before") {
     girlImg.src = girlImg.dataset.normal;
     boyImg.src = boyImg.dataset.normal;
+
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
+
+    boyImg.classList.add("mirror");
 
     headline.innerHTML = `
       Hamarosan kiderül,<br>
       <span class="girl-word">kislány</span> leszek-e vagy
       <span class="boy-word">kisfiú</span>!
     `;
-    confettishower();
   }
 
   if (MODE === "girl") {
     girlImg.src = girlImg.dataset.happy;
-    boyImg.src = girlImg.dataset.mirror;
+    boyImg.src = girlImg.dataset.happy;
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
+
+    boyImg.classList.add("mirror");
 
     headline.textContent = "Kislány leszek!";
-    confettishower();
   }
 
   if (MODE === "boy") {
     girlImg.src = boyImg.dataset.happy;
-    boyImg.src = boyImg.dataset.mirror;
+    boyImg.src = boyImg.dataset.happy;
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
 
+    boyImg.classList.add("mirror");
     headline.textContent = "Kisfiú leszek!";
-    confettishower();
   }
+
+  // =======================
+  // KONFETTI EFFEKT
+  // =======================
+
+  let confettiInterval = null;
+
+  function launchConfettiPiece(side) {
+    const layer = document.getElementById("confettiLayer");
+    if (!layer) return;
+
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+
+    // színek mód szerint
+    const colorsGirl = ["#ff7eb9", "#ffc1dc", "#ff9acb"];
+    const colorsBoy = ["#4da3ff", "#9fd3ff", "#6bbcff"];
+
+    const colors = document.body.classList.contains("girl")
+      ? colorsGirl
+      : colorsBoy;
+
+    confetti.style.backgroundColor =
+      colors[Math.floor(Math.random() * colors.length)];
+
+    // indulási pozíció – alsó sarkok
+    confetti.style.left = side === "left" ? "20px" : "calc(100% - 20px)";
+    confetti.style.bottom = "0px";
+
+    // röppálya
+    const x =
+      side === "left"
+        ? Math.random() * 250 + 100
+        : -(Math.random() * 250 + 100);
+
+    const y = -(Math.random() * 400 + 300);
+
+    confetti.style.setProperty("--x", `${x}px`);
+    confetti.style.setProperty("--y", `${y}px`);
+
+    layer.appendChild(confetti);
+
+    // eltakarítás
+    setTimeout(() => confetti.remove(), 6000);
+  }
+
+
+
 });
-
-// =======================
-// LÁNY KONFETTI
-// =======================
-
-if (MODE === "girl") {
-  const defaults = {
-    spread: 360,
-    ticks: 500,
-    gravity: 0.5,
-    decay: 0.94,
-    startVelocity: 60,
-    //confetti.shapeFromText(),
-    shapes: ["star"],
-    colors: ["#FFE400", "#FFBD00", "#E89400", "#FFCA6C", "#c2185b"],
-  };
-
-  function shoot() {
-    confetti({
-      ...defaults,
-      particleCount: 100,
-      scalar: 6,
-      shapes: ["star"],
-    });
-
-    confetti({
-      ...defaults,
-      particleCount: 250,
-      scalar: 4,
-      shapes: ["star"],
-    });
-
-    confetti({
-      ...defaults,
-      particleCount: 600,
-      scalar: 1,
-      shapes: ["star"],
-    });
-  }
-
-  // kis késleltetés, hogy biztosan látható legyen
-  setTimeout(shoot, 500);
-  setTimeout(shoot, 2000);
-  setTimeout(shoot, 3500);
-}
-// =======================
-// FIÚ KONFETTI
-// =======================
-
-if (MODE === "boy") {
-  const defaults = {
-    spread: 360,
-    ticks: 500,
-    gravity: 0.5,
-    decay: 0.94,
-    startVelocity: 60,
-    shapes: ["star"],
-    colors: ["#FFE400", "#FFBD00", "#E89400", "#FFCA6C", "#1565c0"],
-  };
-
-  function shoot() {
-    confetti({
-      ...defaults,
-      particleCount: 100,
-      scalar: 6,
-      shapes: ["star"],
-    });
-
-    confetti({
-      ...defaults,
-      particleCount: 250,
-      scalar: 4,
-      shapes: ["star"],
-    });
-
-    confetti({
-      ...defaults,
-      particleCount: 600,
-      scalar: 1,
-      shapes: ["star"],
-    });
-  }
-
-  // kis késleltetés, hogy biztosan látható legyen
-  setTimeout(shoot, 500);
-  setTimeout(shoot, 2000);
-  setTimeout(shoot, 3500);
-}
 
 // =======================
 // FADE-ES VÁLTÁS
@@ -202,6 +152,10 @@ function switchMode(mode) {
 const body = document.body;
 
 body.classList.add(MODE, "fade-in");
+
+startConfetti(MODE);
+/*applyContent(MODE); /*hibára fut: not defined
+switchMode(MODE);*/
 
 // =======================
 // TOY BANNER – FOLYAMATOS SPRITE GENERÁTOR

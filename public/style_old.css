@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap");
 
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   width: 100%;
   height: 100%;
@@ -13,7 +14,7 @@ html, body {
 
 body.before {
   background: linear-gradient(135deg, #fff4b8, #d8f3c8);
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
   overflow: hidden;
 }
 
@@ -71,13 +72,13 @@ body.before .center-text .boy-word {
    ========================= */
 
 body.before .banner-track img {
-  animation:
-    toys-float 6s ease-in-out infinite;
+  animation: toys-float 6s ease-in-out infinite;
 }
 
 /* FEL–LE LEBEGÉS */
 @keyframes toys-float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -111,7 +112,6 @@ body.before .banner-track img {
 }*/
 
 @media (max-width: 768px) {
-
   /* a teljes főoldali rendszer magasság-alapú legyen */
   body.before .hero {
     height: auto;
@@ -153,7 +153,7 @@ body.before .banner-track img {
 
 body.girl {
   background: linear-gradient(135deg, #ffd6e8, #ffeaf2);
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
   overflow: hidden;
 }
 
@@ -198,7 +198,8 @@ body.girl .center-text {
 /* ===== ANIMÁCIÓK ===== */
 
 @keyframes girl-bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -236,7 +237,7 @@ body.girl .center-text {
 
 body.boy {
   background: linear-gradient(135deg, #d6ebff, #eef6ff);
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
   overflow: hidden;
 }
 
@@ -280,7 +281,8 @@ body.boy .center-text {
 /* ===== ANIMÁCIÓK ===== */
 
 @keyframes boy-bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -335,8 +337,13 @@ body.boy .baby.right {
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-18px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
 }
 
 .mirror {
@@ -350,20 +357,20 @@ body.boy .baby.right {
    - külön offset felül/alul
    ========================= */
 
-:root{
-  --system-h: 70vh;          /* a 3 sáv együtt */
-  --banner-h: 8vh;           /* banner konténer magassága */
-  --top-banner-offset: 0px;  /* külön állítható */
+:root {
+  --system-h: 70vh; /* a 3 sáv együtt */
+  --banner-h: 8vh; /* banner konténer magassága */
+  --top-banner-offset: 0px; /* külön állítható */
   --bottom-banner-offset: 0px;
 }
 
 /* főoldal legyen referencia */
-body.before{
+body.before {
   position: relative;
 }
 
 /* középső sáv: babák + felirat */
-body.before .page{
+body.before .page {
   position: absolute;
   top: calc(var(--banner-h) + var(--top-banner-offset));
   left: 0;
@@ -376,29 +383,29 @@ body.before .page{
 }
 
 /* babák méretezése konténerhez */
-body.before .baby{
+body.before .baby {
   height: 100%;
-  width: auto;          /* a szélességet az img adja */
-  max-width: none;      /* felülírja a korábbi max-width:300px-et */
+  width: auto; /* a szélességet az img adja */
+  max-width: none; /* felülírja a korábbi max-width:300px-et */
   display: flex;
   align-items: center;
 }
 
-body.before .baby img{
+body.before .baby img {
   height: 95%;
   width: auto;
 }
 
 /* felirat marad középen */
-body.before .center-text{
+body.before .center-text {
   max-width: 40vw;
 }
 
 /* felső/alsó banner konténer */
-body.before .toy-banner{
+body.before .toy-banner {
   position: absolute;
-  left: -5vw;        /* picit túlnyúlhat */
-  width: 110vw;      /* túlnyúlás */
+  left: -5vw; /* picit túlnyúlhat */
+  width: 110vw; /* túlnyúlás */
   height: var(--banner-h);
   overflow: hidden;
   pointer-events: none;
@@ -408,21 +415,21 @@ body.before .toy-banner{
 }
 
 /* felső banner helye */
-body.before .toy-banner.top{
+body.before .toy-banner.top {
   top: var(--top-banner-offset);
 }
 
 /* alsó banner helye: a 70vh rendszer aljára */
-body.before .toy-banner.bottom{
+body.before .toy-banner.bottom {
   top: calc(var(--system-h) - var(--banner-h) + var(--bottom-banner-offset));
 }
 
 /* sprite: maga az IMG (.toy) */
-body.before .toy-banner .toy{
+body.before .toy-banner .toy {
   position: absolute;
   bottom: 0;
 
-  height: 90%;      /* banner konténer 90%-a */
+  height: 90%; /* banner konténer 90%-a */
   width: auto;
 
   will-change: transform;
@@ -430,29 +437,38 @@ body.before .toy-banner .toy{
 }
 
 /* vízszintes mozgás (JS állítja a --distance-t pozitív/negatívra) */
-@keyframes toy-move{
-  from { transform: translateX(0); }
-  to   { transform: translateX(var(--distance)); }
+@keyframes toy-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(var(--distance));
+  }
 }
 
 /* (most “nullázva” hagyjuk: ha később kell fel-le, itt emelünk rajta) */
-@keyframes toy-float{
-  0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(0); } /* 0 = nincs hatása */
+@keyframes toy-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0);
+  } /* 0 = nincs hatása */
 }
 
 /* mobilon kicsit kisebb rendszer */
-@media (max-width: 768px){
-  :root{
+@media (max-width: 768px) {
+  :root {
     --system-h: 70vh;
     --banner-h: 7vh;
   }
 
-  body.before .page{
+  body.before .page {
     padding: 0 4vw;
   }
 
-  body.before .center-text{
+  body.before .center-text {
     max-width: 90vw;
   }
 }
@@ -462,7 +478,7 @@ body.before .toy-banner .toy{
    ========================= */
 
 /* a lebegés és forgás AZ IMG-EN van, nem a .toy-on */
-body.before .toy-banner .toy img{
+body.before .toy-banner .toy img {
   height: 100%;
   width: auto;
 
@@ -471,8 +487,9 @@ body.before .toy-banner .toy img{
 }
 
 /* fel–le lebegés */
-@keyframes toy-float{
-  0%, 100% {
+@keyframes toy-float {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -481,13 +498,24 @@ body.before .toy-banner .toy img{
 }
 
 /* enyhe random jelleg: picit eltérő forgások */
-body.before .toy-banner .toy:nth-child(2) img { animation-duration: 6s; transform: rotate(4deg); }
-body.before .toy-banner .toy:nth-child(3) img { animation-duration: 4.5s; transform: rotate(-3deg); }
-body.before .toy-banner .toy:nth-child(4) img { animation-duration: 5.5s; transform: rotate(2deg); }
-body.before .toy-banner .toy:nth-child(5) img { animation-duration: 6.2s; transform: rotate(-4deg); }
+body.before .toy-banner .toy:nth-child(2) img {
+  animation-duration: 6s;
+  transform: rotate(4deg);
+}
+body.before .toy-banner .toy:nth-child(3) img {
+  animation-duration: 4.5s;
+  transform: rotate(-3deg);
+}
+body.before .toy-banner .toy:nth-child(4) img {
+  animation-duration: 5.5s;
+  transform: rotate(2deg);
+}
+body.before .toy-banner .toy:nth-child(5) img {
+  animation-duration: 6.2s;
+  transform: rotate(-4deg);
+}
 
 @media (max-width: 768px) {
-
   /* teljes rendszer középre */
   body.before {
     overflow-x: hidden;
@@ -501,7 +529,7 @@ body.before .toy-banner .toy:nth-child(5) img { animation-duration: 6.2s; transf
 
   /* sprite-ok se lógjanak túl */
   body.before .toy-banner .toy {
-    max-width: 20vw;   /* játékok ne legyenek túl nagyok */
+    max-width: 20vw; /* játékok ne legyenek túl nagyok */
   }
 }
 
@@ -513,7 +541,7 @@ body.page-404 {
   margin: 0;
   min-height: 100vh;
   background: linear-gradient(135deg, #fff4b8, #d8f3c8);
-  font-family: 'Baloo 2', cursive;
+  font-family: "Baloo 2", cursive;
 
   display: flex;
   align-items: center;
@@ -587,7 +615,6 @@ body.before .center-text .boy-word {
   color: #1565c0 !important;
 }*/
 
-
 /* =========================
    LAYOUT ROOT – FIX ARÁNY
    ========================= */
@@ -620,11 +647,6 @@ body.before .center-text .boy-word {
 
 @media (max-width: 320px), (max-height: 200px) {
   .layout-scale {
-    transform: scale(
-      min(
-        calc(100vw / 320),
-        calc(100vh / 200)
-      )
-    );
+    transform: scale(min(calc(100vw / 320), calc(100vh / 200)));
   }
 }
