@@ -88,7 +88,8 @@ function launchConfetti(side) {
   confetti.style.setProperty("--x", `${x}px`);
   confetti.style.setProperty("--y", `${y}px`);
 
-  document.body.appendChild(confetti);
+  const layer = document.getElementById("confettiLayer");
+  layer.appendChild(confetti);
 
   setTimeout(() => confetti.remove(), 350000);
 }

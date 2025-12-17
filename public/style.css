@@ -40,7 +40,7 @@ body.before .hero {
 }
 
 body.before {
-  background: linear-gradient(135deg, #fff4b8, #82b95d);
+  background: linear-gradient(to bottom, #fff4b8, #b0cf9e);
   position: relative;
 }
 
@@ -152,7 +152,7 @@ body.before .baby img {
    ========================= */
 
 body.girl {
-  background: linear-gradient(135deg, #ffd6e8, #ffeaf2);
+  background: linear-gradient(to bottom, #ffd6e8, #ffeaf2);
 }
 
 body.girl .page {
@@ -182,7 +182,7 @@ body.girl .center-text {
    ========================= */
 
 body.boy {
-  background: linear-gradient(135deg, #d6ebff, #eef6ff);
+  background: linear-gradient(to bottom, #d6ebff, #eef6ff);
 }
 
 body.boy .baby {
@@ -214,7 +214,7 @@ body.boy .banner-container {
    ========================= */
 
 body.page-404 {
-  background: linear-gradient(135deg, #fff4b8, #d8f3c8);
+  background: linear-gradient(to bottom, #fff4b8, #d8f3c8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -273,4 +273,14 @@ body.page-404 {
   .center-text {
     font-size: clamp(32px, 5vw, 48px);
   }
+}
+
+
+/* KONFETTI RÉTEG */
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: visible;
 }
