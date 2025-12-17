@@ -2,7 +2,7 @@
 // MANUÁLIS VEZÉRLÉS
 // =======================
 
-const MODE = "before"; // "before" | "girl" | "boy"
+const MODE = "boy"; // "before" | "girl" | "boy"
 
 // =======================
 // DOM BETÖLTÉS UTÁN
@@ -23,8 +23,18 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // classok törlése
-  body.classList.remove("before", "girl", "boy");
-  body.classList.add(MODE);
+  /*body.classList.remove("before", "girl", "boy");
+  body.classList.add(MODE);*/
+
+  function switchMode(mode) {
+    body.classList.remove("before", "girl", "boy");
+    body.classList.remove("fade-in", "fade-out");
+
+    body.classList.add(mode);
+    body.classList.add("fade-in");
+
+    applyModeContent(mode);
+  }
 
   // tükrözés reset
   girlImg.classList.remove("mirror");
@@ -36,45 +46,65 @@ document.addEventListener("DOMContentLoaded", () => {
     girlImg.src = girlImg.dataset.normal;
     boyImg.src = boyImg.dataset.normal;
 
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
+
+    boyImg.classList.add("mirror");
+
     headline.innerHTML = `
       Hamarosan kiderül,<br>
       <span class="girl-word">kislány</span> leszek-e vagy
       <span class="boy-word">kisfiú</span>!
     `;
-
-    // főoldalon: bal baba jobbra néz
-    girlImg.classList.add("mirror");
   }
 
   if (MODE === "girl") {
     girlImg.src = girlImg.dataset.happy;
     boyImg.src = girlImg.dataset.happy;
+    girlImg.classList.remove("mirror");
+    boyImg.classList.remove("mirror");
+
+    boyImg.classList.add("mirror");
 
     headline.textContent = "Kislány leszek!";
-
-    // bal oldalon kislány balra néz
-    girlImg.classList.remove("mirror");
-    // jobb oldalon kislány jobbra néz
-    boyImg.classList.add("mirror");
   }
 
   if (MODE === "boy") {
     girlImg.src = boyImg.dataset.happy;
     boyImg.src = boyImg.dataset.happy;
-
-    headline.textContent = "Kisfiú leszek!";
-
-    // bal oldalon kisfiú jobbra néz
-    girlImg.classList.add("mirror");
-    // jobb oldalon kisfiú balra néz
+    girlImg.classList.remove("mirror");
     boyImg.classList.remove("mirror");
+
+    boyImg.classList.add("mirror");
+    headline.textContent = "Kisfiú leszek!";
   }
 
   // =======================
   // KONFETTI EFFEKT
   // =======================
 
-  function launchConfetti(side) {
+  // teszteléshez
+  function testConfetti() {
+    const layer = document.getElementById("confettiLayer");
+    if (!layer) {
+      console.error("confettiLayer nem található");
+      return;
+    }
+
+    const c = document.createElement("div");
+    c.style.position = "absolute";
+    c.style.left = "50%";
+    c.style.top = "50%";
+    c.style.width = "12px";
+    c.style.height = "12px";
+    c.style.background = "red";
+    c.style.borderRadius = "50%";
+
+    layer.appendChild(c);
+  }
+  // teszteléshez vége
+
+  /*function launchConfetti(side) {
     const confetti = document.createElement("div");
     confetti.className = "confetti";
 
@@ -120,7 +150,20 @@ document.addEventListener("DOMContentLoaded", () => {
         launchConfetti("right");
       }
     }, 200);
+  }*/
+
+  // teszt-konfetti indítása
+  document.addEventListener("DOMContentLoaded", testConfetti);
+  if (
+    document.body.classList.contains("girl") ||
+    document.body.classList.contains("boy")
+  ) {
+    setInterval(() => {
+      testConfetti("left");
+      testConfetti("right");
+    }, 200);
   }
+  // teszt-konfetti vége
 });
 
 // =======================
@@ -223,3 +266,5 @@ if (MODE === "before") {
     }
   }, 1000);
 }
+
+console.log("BODY CLASSES:", document.body.className);

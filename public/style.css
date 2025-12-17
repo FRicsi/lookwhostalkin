@@ -29,6 +29,14 @@ body.fade-out {
 }
 
 /* =========================
+   TÜKRÖM-TÜKRÖM MONDD MEG NÉKEM, miért szarakodsz minden képpel?
+   ========================= */
+
+.mirror {
+  transform: scaleX(-1);
+}
+
+/* =========================
    FŐOLDAL (BEFORE)
    ========================= */
 
@@ -173,18 +181,29 @@ body.girl {
   background: linear-gradient(to bottom, #ffd6e8, #ffeaf2);
 }
 
-body.girl .page {
-  height: 100vh;
+body.girl .content-container {
+  height: calc(70vh - 16vh);
 }
 
 body.girl .baby {
-  width: 22vw;
-  max-width: 320px;
+  flex: 0 0 28%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.girl .baby {
   animation: bounce-girl 2.8s ease-in-out infinite;
 }
 
 body.girl .baby.right {
   animation-delay: 0.5s;
+}
+
+body.girl .baby img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
 
 @keyframes bounce-girl {
@@ -198,7 +217,7 @@ body.girl .baby.right {
 }
 
 body.girl .center-text {
-  font-size: clamp(42px, 6vw, 72px);
+  /*font-size: clamp(42px, 6vw, 72px);*/
   color: #c2185b;
 }
 
@@ -210,15 +229,31 @@ body.boy {
   background: linear-gradient(to bottom, #d6ebff, #eef6ff);
 }
 
+body.boy .content-container {
+  height: calc(70vh - 16vh);
+}
+
 body.boy .baby {
-  width: 22vw;
-  max-width: 320px;
+  flex: 0 0 28%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.boy .baby {
   animation: bounce-boy 2.8s ease-in-out infinite;
 }
 
 body.boy .baby.right {
   animation-delay: 0.5s;
 }
+
+body.boy .baby img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
 
 @keyframes bounce-boy {
   0%,
@@ -231,7 +266,7 @@ body.boy .baby.right {
 }
 
 body.boy .center-text {
-  font-size: clamp(42px, 6vw, 72px);
+  /*font-size: clamp(42px, 6vw, 72px);*/
   color: #1565c0;
 }
 
