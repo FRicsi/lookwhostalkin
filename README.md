@@ -1,4 +1,4 @@
-# Girlorboy
+# Look, who's talkin'
 
 A small static website configured for Firebase Hosting.
 
@@ -15,7 +15,6 @@ A small static website configured for Firebase Hosting.
   - 404.html
   - script.js
   - style.css
-  - style_old.css
   - images/
 - firebase.json
 
