@@ -2,7 +2,7 @@
 // MANUÁLIS VEZÉRLÉS
 // =======================
 
-const MODE = "before"; // "before" | "girl" | "boy"
+const MODE = "boy"; // "before" | "girl" | "boy"
 
 // =======================
 // DOM BETÖLTÉS UTÁN
